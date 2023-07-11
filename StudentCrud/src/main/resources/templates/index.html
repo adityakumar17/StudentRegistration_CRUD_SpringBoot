@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            color: #333;
+        }
+
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-form button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-new {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .student-table {
+            text-align: center;
+        }
+
+        .student-table table {
+            width: 100%;
+        }
+
+        .student-table th,
+        .student-table td {
+            padding: 10px;
+        }
+
+        .student-table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .student-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .student-table a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .student-table a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Spring Boot CRUD System - Student Registration</h1>
+
+        <form action="/search" method="GET" class="search-form">
+            <input type="text" name="keyword" placeholder="Search by student name">
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="add-new">
+            <h3><a th:href="@{'/new'}">Add new</a></h3>
+        </div>
+
+        <div class="student-table">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Course</th>
+                        <th>Fee</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${liststudent}">
+                        <td th:text="${student.id}">Student ID</td>
+                        <td th:text="${student.studentname}">Student Name</td>
+                        <td th:text="${student.course}">Course</td>
+                        <td th:text="${student.fee}">Fee</td>
+                        <td>
+                            <a th:href="@{'/edit/' + ${student.id}}">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/delete/' + ${student.id}}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
